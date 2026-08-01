@@ -1,97 +1,43 @@
-from account import *
-from validation import *
 
-
+print("="*15 + " TN BANK " + "="*15)
+print()
+print()
+print(" "*10 +"WELCOME TO TN BANK")
+print(" "*5+"Your trusted financial partner")
+content='''
+1. Create Account
+2. Deposit
+3. Withdraw
+4. Balance Check
+5. Display Accounts
+6. Change PIN
+7. Close Account
+8. Exit'''
+print()
 while True:
+    print(content)
+    choice=int(input("Enter the number regarding to your choice:"))
 
-    print("\n===== BANKING SYSTEM =====")
-    print("1. Create Account")
-    print("2. Deposit")
-    print("3. Withdraw")
-    print("4. Balance Check")
-    print("5. Display Accounts")
-    print("6. Exit")
+    if choice == 1:
+        account_id = int(input("Enter Account ID: "))
+        name = input("Enter Name: ")
+        age = int(input("Enter Age: "))
+        phone = input("Enter Phone: ")
+        address = input("Enter Address: ")
+        balance = float(input("Enter Opening Balance: "))
+        pin = input("Enter 4-digit PIN: ")
 
+        from bank import create_account
+        create_account(account_id,name,age,phone,address,balance,pin)
 
-    choice = input("Enter choice: ")
+    elif choice==2:
+        account_id=int(input("Enter Account ID: "))
+        amount=float(input("Enter Amount to Deposit:"))
+        from bank import deposit
+        deposit(account_id, amount)
 
-
-    if choice == "1":
-
-        account_id = input("Enter Account ID: ")
-
-        if check_duplicate(account_id):
-            print("Account ID already exists")
-
-        else:
-            name = input("Enter Name: ")
-            balance = float(input("Initial Deposit: "))
-
-            create_account(account_id, name, balance)
-
-            print("Account Created Successfully")
-
-
-    elif choice == "2":
-
-        account_id = input("Enter Account ID: ")
-        amount = float(input("Deposit Amount: "))
-
-
-        if valid_amount(amount):
-
-            if deposit(account_id, amount):
-                print("Deposit Successful")
-
-            else:
-                print("Account Not Found")
-
-        else:
-            print("Invalid Amount")
-
-
-    elif choice == "3":
-
-        account_id = input("Enter Account ID: ")
-        amount = float(input("Withdraw Amount: "))
-
-
-        if withdraw(account_id, amount):
-            print("Withdrawal Successful")
-
-        else:
-            print("Withdrawal Failed")
-
-
-    elif choice == "4":
-
-        account_id = input("Enter Account ID: ")
-
-        account = get_balance(account_id)
-
-
-        if account:
-
-            print("\nAccount Details")
-            print("ID:", account[0])
-            print("Name:", account[1])
-            print("Balance:", account[2])
-
-        else:
-            print("Account Not Found")
-
-
-    elif choice == "5":
-
-        display_accounts()
-
-
-    elif choice == "6":
-
-        print("Thank you!")
-        break
-
-
-    else:
-
-        print("Invalid Choice")
+    elif choice==3:
+        account_id=int(input("Enter Account ID: "))
+        amount=float(input("Enter Amount to withdraw:"))
+        from bank import withdraw
+        withdraw(account_id, amount)

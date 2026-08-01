@@ -1,56 +1,20 @@
-from storage import accounts
+class Account:
 
+    def __init__(self, account_id, name, age,
+                 phone, address, balance, pin):
+        self.account_id=account_id
+        self.name=name
+        self.age=age
+        self.phone=phone
+        self.address=address
+        self.__balance=balance
+        self.__pin=pin
 
-def create_account(account_id, name, balance):
-    accounts.append([account_id, name, balance])
-    return True
+    def deposit(self, amount):
+        self.__balance+=amount
 
-
-def find_account(account_id):
-    for account in accounts:
-        if account[0] == account_id:
-            return account
-
-    return None
-
-
-def deposit(account_id, amount):
-    account = find_account(account_id)
-
-    if account:
-        account[2] = account[2] + amount
-        return True
-
-    return False
-
-
-def withdraw(account_id, amount):
-    account = find_account(account_id)
-
-    if account:
-        if amount <= account[2]:
-            account[2] = account[2] - amount
+    def withdraw(self, amount):
+        if amount<=self.__balance:
+            self.__balance-=amount
             return True
-
-    return False
-
-
-def get_balance(account_id):
-    account = find_account(account_id)
-
-    if account:
-        return account
-
-    return None
-
-
-def display_accounts():
-    for account in accounts:
-        print(
-            "ID:",
-            account[0],
-            "| Name:",
-            account[1],
-            "| Balance:",
-            account[2]
-        )
+        return False
