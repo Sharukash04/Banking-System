@@ -40,4 +40,9 @@ def get_balance(account_id):
 
 def display_accounts():
     for account in accounts:
-        print("ID:", account.account_id,"| Name:",account.name,"| Balance:",account.get_balance()        )
+        if account:
+            print("ID:",account.account_id,"\n"
+                  "| Name:",account.name,"\n"
+                  "| Balance:",account.get_balance())
+        else:
+            print("No accounts found.")

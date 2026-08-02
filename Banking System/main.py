@@ -41,3 +41,12 @@ while True:
         amount=float(input("Enter Amount to withdraw:"))
         from bank import withdraw
         withdraw(account_id, amount)
+    elif choice==4:
+        account_id=int(input("Enter Account ID: "))
+        from bank import get_balance
+        balance=get_balance(account_id)
+        print("Your Balance is:",balance)
+    elif choice==5:
+        from bank import display_accounts
+        display_accounts()
+    

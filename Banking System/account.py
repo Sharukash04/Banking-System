@@ -10,11 +10,17 @@ class Account:
         self.__balance=balance
         self.__pin=pin
 
+    def get_balance(self):
+        return self.__balance
+
+    def verify_pin(self, pin):
+        return self.__pin==pin
+
     def deposit(self, amount):
         self.__balance+=amount
 
     def withdraw(self, amount):
-        if amount<=self.__balance:
+        if amount <= self.__balance:
             self.__balance-=amount
             return True
         return False
