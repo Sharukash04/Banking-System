@@ -8,19 +8,17 @@ def create_account(account_id, name, age, phone, address, balance, pin):# Check 
             return False  # Account already in bank
     
     account = Account(account_id,name,age,phone,address,balance,pin)
-    accounts.append(account)
+    accounts[account.account_id]=account
     return True
 
 def find_account(account_id):
-    for account in accounts:
-        if account.account_id==account_id:
-            return account
+    if account_id in accounts:
+        return accounts.get(account_id)
     return None
 
 def deposit(account_id, amount):
-    account=find_account(account_id)
-    if account:
-        account.deposit(amount)
+    if account_id in accounts:
+        accounts[account_id].deposit(amount)
         return True
     return False
 
