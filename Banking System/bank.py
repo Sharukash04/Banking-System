@@ -57,12 +57,18 @@ def deposit(acc_id,amount):
 
 # Withdraw money
 def withdraw(acc_id,amount):
-
     acc=account_dao.find_account(acc_id)
-
     if acc:
-        return acc.withdraw(amount)
-
+        if acc.withdraw(amount):
+            transaction=Transaction(
+                "WITHDRAW",
+                amount,
+                acc_id,
+                acc_id,
+                datetime.now()
+            )
+            acc.transactions.append(transaction)
+            return True
     return False
 
 
