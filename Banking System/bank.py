@@ -57,9 +57,13 @@ def deposit(acc_id,amount):
 
 # Withdraw money
 def withdraw(acc_id,amount):
+
     acc=account_dao.find_account(acc_id)
+
     if acc:
+
         if acc.withdraw(amount):
+
             transaction=Transaction(
                 "WITHDRAW",
                 amount,
@@ -67,8 +71,11 @@ def withdraw(acc_id,amount):
                 acc_id,
                 datetime.now()
             )
+
             acc.transactions.append(transaction)
+
             return True
+
     return False
 
 
@@ -178,7 +185,30 @@ def reverse_last_transaction(account_id):
 
     transaction=account.transactions[-1]
 
-    if transaction.transaction_type=="TRANSFER":
+
+    # Reverse deposit
+    if transaction.transaction_type=="DEPOSIT":
+
+        if account.get_balance()<transaction.amount:
+            return False
+
+        account.withdraw(transaction.amount)
+        account.transactions.remove(transaction)
+
+        return True
+
+
+    # Reverse withdrawal
+    elif transaction.transaction_type=="WITHDRAW":
+
+        account.deposit(transaction.amount)
+        account.transactions.remove(transaction)
+
+        return True
+
+
+    # Reverse transfer
+    elif transaction.transaction_type=="TRANSFER":
 
         sender=find_account(transaction.source_account)
         receiver=find_account(transaction.destination_account)
@@ -196,5 +226,6 @@ def reverse_last_transaction(account_id):
         receiver.transactions.remove(transaction)
 
         return True
+
 
     return False
