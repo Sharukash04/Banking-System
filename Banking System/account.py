@@ -1,36 +1,31 @@
+from dataclasses import dataclass,field
+@dataclass
 class Account:
+    account_id: int
+    name: str
+    age: int
+    phone: str
+    address: str
+    balance: float
+    pin: str
+    transactions: list=field(default_factory=list)
+    def deposit(self,amount):
+        self.balance+=amount
 
-    def __init__(self, account_id, name, age,phone, address, balance, pin):
-        self.account_id=account_id
-        self.name=name
-        self.age=age
-        self.phone=phone
-        self.address=address
-        self.__balance=balance
-        self.__pin=pin
-        self.transactions=[]
-
-    def deposit(self, amount):
-        self.__balance += amount
-
-    def withdraw(self, amount):
-
-        if amount <= self.__balance:
-            self.__balance -= amount
+    def withdraw(self,amount):
+        if amount<=self.balance:
+            self.balance-=amount
             return True
-
         return False
 
     def get_balance(self):
-        return self.__balance
+        return self.balance
 
-    def verify_pin(self, pin):
-        return self.__pin == pin
+    def verify_pin(self,pin):
+        return self.pin==pin
 
-    def change_pin(self, old_pin, new_pin):
-
-        if self.__pin == old_pin:
-            self.__pin = new_pin
+    def change_pin(self,old_pin,new_pin):
+        if self.pin==old_pin:
+            self.pin=new_pin
             return True
-
         return False
