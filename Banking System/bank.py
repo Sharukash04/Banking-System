@@ -50,6 +50,8 @@ def deposit(acc_id,amount):
 
         acc.transactions.append(transaction)
 
+        account_dao.save_account(acc)
+
         return True
 
     return False
@@ -73,6 +75,8 @@ def withdraw(acc_id,amount):
             )
 
             acc.transactions.append(transaction)
+
+            account_dao.save_account(acc)
 
             return True
 
@@ -120,7 +124,13 @@ def change_pin(acc_id,old_pin,new_pin):
     acc=account_dao.find_account(acc_id)
 
     if acc:
-        return acc.change_pin(old_pin,new_pin)
+
+        result=acc.change_pin(old_pin,new_pin)
+
+        if result:
+            account_dao.save_account(acc)
+
+        return result
 
     return False
 
@@ -169,6 +179,9 @@ def transfer(from_id,to_id,amount):
     sender.transactions.append(transaction)
     receiver.transactions.append(transaction)
 
+    account_dao.save_account(sender)
+    account_dao.save_account(receiver)
+
     return True
 
 
@@ -195,6 +208,8 @@ def reverse_last_transaction(account_id):
         account.withdraw(transaction.amount)
         account.transactions.remove(transaction)
 
+        account_dao.save_account(account)
+
         return True
 
 
@@ -203,6 +218,8 @@ def reverse_last_transaction(account_id):
 
         account.deposit(transaction.amount)
         account.transactions.remove(transaction)
+
+        account_dao.save_account(account)
 
         return True
 
@@ -224,6 +241,9 @@ def reverse_last_transaction(account_id):
 
         sender.transactions.remove(transaction)
         receiver.transactions.remove(transaction)
+
+        account_dao.save_account(sender)
+        account_dao.save_account(receiver)
 
         return True
 

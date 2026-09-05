@@ -1,0 +1,45 @@
+[
+    {
+        "account_id": 101,
+        "name": "Sharukash",
+        "age": 19,
+        "phone": "9876543210",
+        "address": "Trichy",
+        "balance": 5000,
+        "pin": "1234",
+        "transactions": [
+            {
+                "transaction_type": "DEPOSIT",
+                "amount": 1000,
+                "source_account": 101,
+                "destination_account": 101,
+                "timestamp": "2026-09-05T23:11:05.271245"
+            }
+        ]
+    },
+    {
+        "account_id": 201,
+        "name": "Persistence Test",
+        "age": 20,
+        "phone": "9876543212",
+        "address": "Trichy",
+        "balance": 5500,
+        "pin": "1234",
+        "transactions": [
+            {
+                "transaction_type": "DEPOSIT",
+                "amount": 1000,
+                "source_account": 201,
+                "destination_account": 201,
+                "timestamp": "2026-09-05T23:47:46.333708"
+            },
+            {
+                "transaction_type": "WITHDRAW",
+                "amount": 500,
+                "source_account": 201,
+                "destination_account": 201,
+                "timestamp": "2026-09-05T23:47:46.334946"
+            }
+        ]
+    }
+]

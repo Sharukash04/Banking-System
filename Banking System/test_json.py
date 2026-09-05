@@ -30,8 +30,27 @@ accounts=[account]
 
 save_accounts(accounts)
 
-print("Account and transaction saved successfully")
+print("Account saved successfully")
 
 loaded_accounts=load_accounts()
 
-print(loaded_accounts)
+loaded_account=loaded_accounts[0]
+
+print("Loaded account:",loaded_account.name)
+print("Loaded balance:",loaded_account.get_balance())
+print("Loaded transactions:",len(loaded_account.transactions))
+
+print(
+    "Transaction type:",
+    loaded_account.transactions[0].transaction_type
+)
+
+print(
+    "Transaction amount:",
+    loaded_account.transactions[0].amount
+)
+
+print(
+    "Transaction timestamp:",
+    loaded_account.transactions[0].timestamp
+)
