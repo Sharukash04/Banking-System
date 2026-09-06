@@ -1,0 +1,12 @@
+[
+    {
+        "account_id": 1,
+        "name": "nsk",
+        "age": 19,
+        "phone": "1234567891",
+        "address": "f",
+        "balance": 100.0,
+        "pin": "1428",
+        "transactions": []
+    }
+]

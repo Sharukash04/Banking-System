@@ -10,6 +10,15 @@ accounts={}
 customer_index=defaultdict(list)
 
 
+def set_repository(new_repository):
+
+    global repository
+
+    repository=new_repository
+
+    load_accounts()
+
+
 def load_accounts():
 
     global accounts
