@@ -1,6 +1,6 @@
 from account import Account
 from transaction import Transaction
-from json_storage import save_accounts,load_accounts
+from json_storage import save_all,load_accounts
 from datetime import datetime
 
 
@@ -28,9 +28,11 @@ account.transactions.append(transaction)
 
 accounts=[account]
 
-save_accounts(accounts)
+
+save_all(accounts)
 
 print("Account saved successfully")
+
 
 loaded_accounts=load_accounts()
 
@@ -40,15 +42,18 @@ print("Loaded account:",loaded_account.name)
 print("Loaded balance:",loaded_account.get_balance())
 print("Loaded transactions:",len(loaded_account.transactions))
 
+
 print(
     "Transaction type:",
     loaded_account.transactions[0].transaction_type
 )
 
+
 print(
     "Transaction amount:",
     loaded_account.transactions[0].amount
 )
+
 
 print(
     "Transaction timestamp:",
