@@ -1,0 +1,9 @@
+[
+    {
+        "transaction_type": "DEPOSIT",
+        "amount": 1000,
+        "source_account": 101,
+        "destination_account": 101,
+        "timestamp": "2026-09-07T20:39:30.989815"
+    }
+]
