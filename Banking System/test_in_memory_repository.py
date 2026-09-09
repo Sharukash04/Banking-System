@@ -1,10 +1,6 @@
 from account import Account
 from in_memory_account_repository import InMemoryAccountRepository
-
-
 repository=InMemoryAccountRepository()
-
-
 account=Account(
     301,
     "Memory Test",
@@ -15,9 +11,7 @@ account=Account(
     "1234"
 )
 
-
 repository.save(account)
-
 print("Account saved")
 
 found_account=repository.get(301)

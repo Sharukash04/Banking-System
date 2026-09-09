@@ -2,20 +2,37 @@ import json
 from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
+
 from account import Account
 from transaction import Transaction
-accounts_file=Path("accounts.json")
-transactions_file=Path("transactions.json")
+
+
+BASE_DIR=Path(__file__).resolve().parent
+
+accounts_file=BASE_DIR/"accounts.json"
+transactions_file=BASE_DIR/"transactions.json"
+
+
 def json_serializer(value):
+
     if isinstance(value,datetime):
         return value.isoformat()
+
     raise TypeError("Type not supported")
+
+
 def save_accounts(accounts):
+
     data=[]
+
     for account in accounts:
+
         account_data=asdict(account)
+
         account_data.pop("transactions",None)
+
         data.append(account_data)
+
     json_data=json.dumps(
         data,
         default=json_serializer,
@@ -24,11 +41,16 @@ def save_accounts(accounts):
 
     accounts_file.write_text(json_data)
 
+
 def save_transactions(accounts):
+
     data=[]
     saved_transactions=set()
+
     for account in accounts:
+
         for transaction in account.transactions:
+
             key=(
                 transaction.transaction_type,
                 transaction.amount,

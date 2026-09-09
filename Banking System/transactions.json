@@ -5,5 +5,19 @@
         "source_account": 101,
         "destination_account": 101,
         "timestamp": "2026-09-07T20:39:30.989815"
+    },
+    {
+        "transaction_type": "DEPOSIT",
+        "amount": 1000,
+        "source_account": 201,
+        "destination_account": 201,
+        "timestamp": "2026-09-09T20:59:37.674251"
+    },
+    {
+        "transaction_type": "WITHDRAW",
+        "amount": 500,
+        "source_account": 201,
+        "destination_account": 201,
+        "timestamp": "2026-09-09T20:59:37.675325"
     }
 ]

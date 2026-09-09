@@ -7,5 +7,14 @@
         "address": "Trichy",
         "balance": 5000,
         "pin": "1234"
+    },
+    {
+        "account_id": 201,
+        "name": "Persistence Test",
+        "age": 20,
+        "phone": "9876543212",
+        "address": "Trichy",
+        "balance": 5500,
+        "pin": "1234"
     }
 ]

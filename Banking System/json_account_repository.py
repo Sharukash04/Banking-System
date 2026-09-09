@@ -2,7 +2,7 @@ from typing import Optional
 
 from account import Account
 from account_repository import AccountRepository
-from json_storage import save_accounts,load_accounts
+from json_storage import save_all,load_accounts
 
 
 class JsonAccountRepository(AccountRepository):
@@ -25,7 +25,7 @@ class JsonAccountRepository(AccountRepository):
 
             accounts.append(account)
 
-        save_accounts(accounts)
+        save_all(accounts)
 
 
     def get(self,account_id:int)->Optional[Account]:
@@ -54,7 +54,8 @@ class JsonAccountRepository(AccountRepository):
             if account.account_id==account_id:
 
                 accounts.remove(account)
-                save_accounts(accounts)
+
+                save_all(accounts)
 
                 return True
 
