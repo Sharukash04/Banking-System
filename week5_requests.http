@@ -1,0 +1,13 @@
+### Get all accounts
+GET http://127.0.0.1:8000/accounts
+Accept: application/json
+
+
+### Get one account
+GET http://127.0.0.1:8000/accounts/201
+Accept: application/json
+
+
+### Test account not found
+GET http://127.0.0.1:8000/accounts/999
+Accept: application/json
