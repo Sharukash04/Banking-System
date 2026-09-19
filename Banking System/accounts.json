@@ -16,5 +16,14 @@
         "address": "Trichy",
         "balance": 5500,
         "pin": "1234"
+    },
+    {
+        "account_id": 301,
+        "name": "Test User",
+        "age": 20,
+        "phone": "9876543210",
+        "address": "Trichy",
+        "balance": 5000.0,
+        "pin": "1234"
     }
 ]
