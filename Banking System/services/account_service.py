@@ -32,7 +32,24 @@ class AccountService:
         return True
 
 
+    def update_account(self,account_id:int,account_data):
+
+        account=self.repository.get(account_id)
+
+        if account is None:
+
+            return None
+
+        account.name=account_data.name
+        account.age=account_data.age
+        account.phone=account_data.phone
+        account.address=account_data.address
+
+        self.repository.save(account)
+
+        return account
+
+
     def delete_account(self,account_id:int):
 
         return self.repository.delete(account_id)
-

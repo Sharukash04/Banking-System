@@ -1,9 +1,8 @@
-
 from fastapi import APIRouter,Depends,HTTPException
 
 from account import Account
 from account_dto import AccountDTO
-from account_request import AccountCreate
+from account_request import AccountCreate,AccountUpdate
 from services.account_service import AccountService
 from dependencies import get_account_service
 
@@ -12,11 +11,13 @@ router=APIRouter(
     tags=["Accounts"]
 )
 
+
 @router.get("/",response_model=list[AccountDTO])
 def get_accounts(
     service:AccountService=Depends(get_account_service)
 ):
     return service.get_all_accounts()
+
 
 @router.get("/{account_id}",response_model=AccountDTO)
 def get_account(
@@ -32,6 +33,7 @@ def get_account(
         )
 
     return account
+
 
 @router.post("/",response_model=AccountDTO,status_code=201)
 def create_account(
@@ -57,3 +59,38 @@ def create_account(
         )
 
     return account
+
+
+@router.put("/{account_id}",response_model=AccountDTO)
+def update_account(
+    account_id:int,
+    account_data:AccountUpdate,
+    service:AccountService=Depends(get_account_service)
+):
+    account=service.update_account(account_id,account_data)
+
+    if account is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Account not found"
+        )
+
+    return account
+
+
+@router.delete("/{account_id}")
+def delete_account(
+    account_id:int,
+    service:AccountService=Depends(get_account_service)
+):
+    deleted=service.delete_account(account_id)
+
+    if not deleted:
+        raise HTTPException(
+            status_code=404,
+            detail="Account not found"
+        )
+
+    return {
+        "message":"Account deleted successfully"
+    }
