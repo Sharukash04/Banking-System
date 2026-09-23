@@ -50,6 +50,28 @@ class AccountService:
         return account
 
 
+    def transfer(self,from_id,to_id,amount):
+
+        sender=self.repository.get(from_id)
+        receiver=self.repository.get(to_id)
+
+        if sender is None or receiver is None:
+            return False
+
+        if amount<=0:
+            return False
+
+        if not sender.withdraw(amount):
+            return False
+
+        receiver.deposit(amount)
+
+        self.repository.save(sender)
+        self.repository.save(receiver)
+
+        return True
+
+
     def delete_account(self,account_id:int):
 
         return self.repository.delete(account_id)

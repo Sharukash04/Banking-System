@@ -2,7 +2,7 @@ from fastapi import APIRouter,Depends,HTTPException
 
 from account import Account
 from account_dto import AccountDTO
-from account_request import AccountCreate,AccountUpdate
+from account_request import AccountCreate,AccountUpdate,TransferRequest
 from services.account_service import AccountService
 from dependencies import get_account_service
 
@@ -93,4 +93,26 @@ def delete_account(
 
     return {
         "message":"Account deleted successfully"
+    }
+
+
+@router.post("/transfer")
+def transfer(
+    transfer_data:TransferRequest,
+    service:AccountService=Depends(get_account_service)
+):
+    transferred=service.transfer(
+        transfer_data.from_id,
+        transfer_data.to_id,
+        transfer_data.amount
+    )
+
+    if not transferred:
+        raise HTTPException(
+            status_code=400,
+            detail="Transfer failed"
+        )
+
+    return {
+        "message":"Transfer successful"
     }
